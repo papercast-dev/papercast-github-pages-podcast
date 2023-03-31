@@ -1,1 +1,1 @@
-from .github_pages import GitHubPagesPodcastPublisher
+from .github_pages import GithubPagesPodcastPublisher

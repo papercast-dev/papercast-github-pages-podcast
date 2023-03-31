@@ -52,7 +52,7 @@ EPISODE_TEMPLATE = """
 """
 
 
-class GitHubPagesPodcastPublisher(BasePublisher):
+class GithubPagesPodcastPublisher(BasePublisher):
     def __init__(
         self,
         xml_path: str,
