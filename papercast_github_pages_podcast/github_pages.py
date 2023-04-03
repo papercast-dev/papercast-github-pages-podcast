@@ -129,7 +129,7 @@ class GithubPagesPodcastPublisher(BasePublisher):
             "title": production.title,
             "subtitle": "",
             "description": production.description,
-            "mp3path": production.mp3_path,
+            "mp3path": self.base_url + production.mp3_path,
             "duration": str(length),
             "season": 1,  # TODO
             "episode": episode_num,
@@ -139,12 +139,15 @@ class GithubPagesPodcastPublisher(BasePublisher):
         }
 
         episode_xml = self.episode_template.render(episode_meta)
+        # print(episode_xml)
+        # print(type(episode_xml))
+        # quit()
 
         channel = soup.find("channel")
 
         if channel is None:
             raise ValueError("No channel found in podcast xml")
 
-        channel.insert(-1, BeautifulSoup(episode_xml))
+        channel.insert(-1, BeautifulSoup(episode_xml).find("item"))
 
         self.xml_path.write_text(str(soup))
