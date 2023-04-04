@@ -80,6 +80,7 @@ class GithubPagesPodcastPublisher(BasePublisher):
         self.xml_path = Path(xml_path)
         self.podcast_template = Template(template)
         self.episode_template = Template(episode_template)
+        self.base_url = base_url
         self.podcast_template.render(
             title=title,
             base_url=base_url,
@@ -129,7 +130,7 @@ class GithubPagesPodcastPublisher(BasePublisher):
             "title": production.title,
             "subtitle": "",
             "description": production.description,
-            "mp3path": self.base_url + production.mp3_path,
+            "mp3path": self.base_url + str(production.mp3_path),
             "duration": str(length),
             "season": 1,  # TODO
             "episode": episode_num,
