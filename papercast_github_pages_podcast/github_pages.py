@@ -53,6 +53,12 @@ EPISODE_TEMPLATE = """
 
 
 class GithubPagesPodcastPublisher(BasePublisher):
+    input_types = {
+            "mp3_path": str,
+            "title": str,
+            "description": str,
+        }
+
     def __init__(
         self,
         xml_path: str,
@@ -95,12 +101,6 @@ class GithubPagesPodcastPublisher(BasePublisher):
             )
             self.xml_path.write_text(xml_content)
 
-    def input_types(self) -> Dict[str, Any]:
-        return {
-            "mp3_path": str,
-            "title": str,
-            "description": str,
-        }
 
     def _get_mp3_size_length(self, mp3_path: str):
         statinfo = os.stat(mp3_path)
@@ -139,9 +139,6 @@ class GithubPagesPodcastPublisher(BasePublisher):
         }
 
         episode_xml = self.episode_template.render(episode_meta)
-        # print(episode_xml)
-        # print(type(episode_xml))
-        # quit()
 
         channel = soup.find("channel")
 
